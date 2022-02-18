@@ -30,8 +30,8 @@ jobs:
         run: |
           
           pwd
-          solution_version=$(jq .version manifest.json)
-          solution_name=$(jq .name manifest.json)
+          solution_version=$(jq -r .version manifest.json)
+          solution_name=$(jq -r .name manifest.json)
           ls
           chmod +x tool/vctl
           ./tool/vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'
