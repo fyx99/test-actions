@@ -33,8 +33,6 @@ jobs:
           unzip tool/DISYSMGMTCLI06_0-80005163.ZIP
           ls
           pwd
-          ls /tool/vctl
-          cd /vctl
           vctl help
       - uses: actions/checkout@v2
 
