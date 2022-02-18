@@ -19,8 +19,9 @@ jobs:
       - name: Unzip VCTL
         run: |
           ls
-          unzip tool/vctl.zip 
+          unzip tool/vctl.zip -d tool
           ls
+          pwd
           cd tool
           ls
           cd ..
