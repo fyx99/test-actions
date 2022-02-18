@@ -33,7 +33,7 @@ jobs:
           unzip tool/DISYSMGMTCLI06_0-80005163.ZIP
           ls
           pwd
-          vctl help
+          ./vctl help
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
