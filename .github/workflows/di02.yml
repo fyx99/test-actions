@@ -30,6 +30,8 @@ jobs:
         run: |
           pwd
           cd tool
+          ls
+          chmod +x vctl
           ./vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'
       - uses: actions/checkout@v2
 
