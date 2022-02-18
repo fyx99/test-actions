@@ -16,6 +16,14 @@ jobs:
     #environment: TEST
     steps:
       - uses: actions/checkout@v2
+      - name: Unzip VCTL
+        run: |
+          ls
+          unzip tool/vctl.zip 
+          ls
+          cd tool
+          ls
+          cd ..
       - name: Build zipped solution from Vflow folder and Manifest.json
         run: |
           mkdir temp_solution/content/files -p
