@@ -26,13 +26,9 @@ jobs:
     
     
       - name: Download a Build Artifact
-        uses: actions/download-artifact@v2.1.0
-        with:
-          # Artifact name
-          name: Download VCTL# optional
-          # Destination path
-          path: https://github.tools.sap/D070430/diactionstest/raw/main/DISYSMGMTCLI06_0-80005163.ZIP
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        run: |
+          wget "https://github.tools.sap/D070430/diactionstest/raw/main/DISYSMGMTCLI06_0-80005163.ZIP" -O vctl.zip
+          unzip vctl.zip
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
