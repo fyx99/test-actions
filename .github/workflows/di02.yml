@@ -28,12 +28,12 @@ jobs:
 
       - name: VCTL test
         run: |
-          alias vctl='./tool/vctl'
+          
           pwd
           
           ls
           chmod +x tool/vctl
-          vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'
+          ./tool/vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'
           mkdir temp_solution/content/files -p
           pwd
           ls
@@ -42,14 +42,14 @@ jobs:
           cd temp_solution
           zip -r ../temp_solution.zip . *
           cd ..
-          vctl solution upload "temp_solution.zip"
+          ./tool/vctl solution upload "temp_solution.zip"
 
-          vctl vrep user rm /files/vflow/subengines/com/sap/python36/operators --recursive
-          vctl vrep user rm /files/vflow/graphs --recursive
+          ./tool/vctl vrep user rm /files/vflow/subengines/com/sap/python36/operators --recursive
+          ./tool/vctl vrep user rm /files/vflow/graphs --recursive
 
-          vctl vrep user import-solution ingkaOperators $(jq .version manifest.json)
+          ./tool/vctl vrep user import-solution ingkaOperators $(jq .version manifest.json)
 
-          vctl logout
+          ./tool/vctl logout
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
