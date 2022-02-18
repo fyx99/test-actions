@@ -21,11 +21,19 @@ jobs:
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:    
-      - name: Download a Build Artifact
+    steps:
+      - uses: actions/checkout@v2
+#       - name: Setup tmate session
+#         uses: mxschmitt/action-tmate@v3
+
+      - name: VCTL test
         run: |
-          wget "https://github.tools.sap/D070430/diactionstest/raw/main/DISYSMGMTCLI06_0-80005163.ZIP" -O vctl.zip
-          unzip vctl.zip
+          pwd
+          ls 
+          unzip tool/DISYSMGMTCLI06_0-80005163.ZIP
+          ls
+          pwd
+          ./vctl help
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
