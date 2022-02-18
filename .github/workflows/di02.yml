@@ -30,7 +30,8 @@ jobs:
         run: |
           
           pwd
-          
+          solution_version=$(jq .version manifest.json)
+          solution_name=$(jq .name manifest.json)
           ls
           chmod +x tool/vctl
           ./tool/vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'
@@ -40,14 +41,14 @@ jobs:
           cp -r vflow temp_solution/content/files/vflow
           cp manifest.json temp_solution/manifest.json
           cd temp_solution
-          zip -r ../temp_solution.zip . *
+          zip -r ../solution-${solution_version}.zip . *
           cd ..
-          ./tool/vctl solution upload "temp_solution.zip"
+          ./tool/vctl solution upload "solution-${solution_version}.zip"
 
           ./tool/vctl vrep user rm /files/vflow/subengines/com/sap/python36/operators --recursive
           ./tool/vctl vrep user rm /files/vflow/graphs --recursive
 
-          ./tool/vctl vrep user import-solution ingkaOperators $(jq .version manifest.json)
+          ./tool/vctl vrep user import-solution $(solution_name) $(solution_version)
 
           ./tool/vctl logout
 
