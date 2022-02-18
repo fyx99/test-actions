@@ -32,7 +32,7 @@ jobs:
           
           ls
           chmod +x tool/vctl
-          .tool/vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'
+          ./tool/vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'
           cd ..
           sudo mkdir temp_solution/content/files
           cp -r vflow temp_solution/content/files/vflow
@@ -40,7 +40,7 @@ jobs:
           cd temp_solution
           zip -r ../temp_solution.zip . *
           cd ..
-          .tool/vctl solution upload "temp_solution.zip"
+          ./tool/vctl solution upload "temp_solution.zip"
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
