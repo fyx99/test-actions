@@ -48,7 +48,7 @@ jobs:
           ./tool/vctl vrep user rm /files/vflow/subengines/com/sap/python36/operators --recursive
           ./tool/vctl vrep user rm /files/vflow/graphs --recursive
 
-          ./tool/vctl vrep user import-solution $(solution_name) $(solution_version)
+          ./tool/vctl vrep user import-solution "${solution_name}" "${solution_version}"
 
           ./tool/vctl logout
 
