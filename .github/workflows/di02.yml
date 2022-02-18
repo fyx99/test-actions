@@ -25,7 +25,7 @@ jobs:
       - name: Download a Build Artifact
         run: |
           ls tool
-          unzip vctl.zip
+          unzip tool/vctl.zip
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
