@@ -24,6 +24,8 @@ jobs:
     steps:    
       - name: Download a Build Artifact
         run: |
+          pwd
+          ls
           ls tool
           unzip tool/vctl.zip
           cd /tool
