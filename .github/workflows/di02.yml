@@ -23,12 +23,13 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:    
       - name: Download a Build Artifact
+        working-directory: ./tool
         run: |
           pwd
           echo $(ls)
-          ls /tool
-          unzip tool/vctl.zip
-          cd /tool
+          ls 
+          unzip vctl.zip
+          cd /vctl
           vctl help
       - uses: actions/checkout@v2
 
