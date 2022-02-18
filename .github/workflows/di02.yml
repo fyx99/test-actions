@@ -24,7 +24,7 @@ jobs:
     steps:    
       - name: Download a Build Artifact
         run: |
-          wget "https://github.tools.sap/D070430/diactionstest/raw/main/DISYSMGMTCLI06_0-80005163.ZIP" -O vctl.zip
+          ls tool
           unzip vctl.zip
       - uses: actions/checkout@v2
 
