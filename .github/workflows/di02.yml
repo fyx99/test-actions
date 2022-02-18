@@ -33,7 +33,6 @@ jobs:
           ls
           chmod +x tool/vctl
           ./tool/vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'
-          cd ..
           mkdir temp_solution/content/files -p
           pwd
           ls
