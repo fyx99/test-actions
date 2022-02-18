@@ -25,8 +25,8 @@ jobs:
       - name: Download a Build Artifact
         run: |
           pwd
-          ls
-          ls tool
+          echo $(ls)
+          ls /tool
           unzip tool/vctl.zip
           cd /tool
           vctl help
