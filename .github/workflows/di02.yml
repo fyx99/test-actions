@@ -30,7 +30,7 @@ jobs:
           ./tool/vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'     
       - name: VCTL Upload Solution to Solution Repository
         run: |
-          ./tool/vctl solution delete "$(jq -r .name manifest.json)" "$(jq -r .version manifest.json)"
+          ./tool/vctl solution delete "$(jq -r .name manifest.json)" "$(jq -r .version manifest.json)" || echo "No Solution deleted"
           ./tool/vctl solution upload "solution.zip"
       - name: VCTL Delete old Files in Dirs
         run: |
