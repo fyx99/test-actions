@@ -23,16 +23,12 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
-#       - name: Setup tmate session
-#         uses: mxschmitt/action-tmate@v3
-
-      - name: VCTL test
+      - name: Gather Manifest.json Name and Version
         run: |
-          
-          pwd
           solution_version=$(jq -r .version manifest.json)
           solution_name=$(jq -r .name manifest.json)
-          ls
+      - name: VCTL test
+        run: |
           chmod +x tool/vctl
           ./tool/vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'
           mkdir temp_solution/content/files -p
