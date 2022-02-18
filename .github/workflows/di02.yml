@@ -16,27 +16,20 @@ jobs:
     #environment: TEST
     steps:
       - uses: actions/checkout@v2
-      - name: Gather Manifest.json Name and Version
-        run: |
-          solution_version=$(jq -r .version manifest.json)
-          solution_name=$(jq -r .name manifest.json)
       - name: Build zipped solution from Vflow folder and Manifest.json
         run: |
           mkdir temp_solution/content/files -p
-          pwd
-          ls
           cp -r vflow temp_solution/content/files/vflow
           cp manifest.json temp_solution/manifest.json
           cd temp_solution
-          zip -r ../solution-${solution_version}.zip . *
+          zip -r ../solution.zip . *
           cd ..
-          ls
       - name: VCTL Login
         run: |
           chmod +x tool/vctl
           ./tool/vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'     
       - name: VCTL Upload Solution to Solution Repository
-        run: ./tool/vctl solution upload "solution-${solution_version}.zip"
+        run: ./tool/vctl solution upload "solution.zip"
       - name: VCTL Delete old Files in Dirs
         run: |
           ./tool/vctl vrep user rm /files/vflow/subengines/com/sap/python36/operators --recursive
