@@ -1,8 +1,5 @@
-# This is a basic workflow to help you get started with Actions
+name: DI_DEPLOY_ON_PUSH
 
-name: CI
-
-# Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
@@ -13,24 +10,18 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  deploy:
     runs-on: ubuntu-latest
-    environment: TEST
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    #environment: TEST
     steps:
       - uses: actions/checkout@v2
       - name: Gather Manifest.json Name and Version
         run: |
           solution_version=$(jq -r .version manifest.json)
           solution_name=$(jq -r .name manifest.json)
-      - name: VCTL test
+      - name: Build zipped solution from Vflow folder and Manifest.json
         run: |
-          chmod +x tool/vctl
-          ./tool/vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'
           mkdir temp_solution/content/files -p
           pwd
           ls
@@ -39,21 +30,17 @@ jobs:
           cd temp_solution
           zip -r ../solution-${solution_version}.zip . *
           cd ..
-          ./tool/vctl solution upload "solution-${solution_version}.zip"
-
+      - name: VCTL Login
+        run: |
+          chmod +x tool/vctl
+          ./tool/vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'     
+      - name: VCTL Upload Solution to Solution Repository
+        run: ./tool/vctl solution upload "solution-${solution_version}.zip"
+      - name: VCTL Delete old Files in Dirs
+        run: |
           ./tool/vctl vrep user rm /files/vflow/subengines/com/sap/python36/operators --recursive
           ./tool/vctl vrep user rm /files/vflow/graphs --recursive
-
-          ./tool/vctl vrep user import-solution "${solution_name}" "${solution_version}"
-
-          ./tool/vctl logout
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: VCTL Import Solution in User Workspace
+        run: ./tool/vctl vrep user import-solution "${solution_name}" "${solution_version}"
+      - name: VCTL Logout
+        run: ./tool/vctl logout
