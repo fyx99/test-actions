@@ -35,6 +35,8 @@ jobs:
           ./tool/vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'
           cd ..
           mkdir temp_solution/content/files -p
+          pwd
+          ls
           cp -r vflow temp_solution/content/files/vflow
           cp manifest.json temp_solution/manifest.json
           cd temp_solution
