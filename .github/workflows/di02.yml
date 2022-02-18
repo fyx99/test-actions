@@ -29,11 +29,7 @@ jobs:
       - name: VCTL test
         run: |
           pwd
-          ls 
-          unzip tool/DISYSMGMTCLI06_0-80005163.ZIP
-          ls
-          pwd
-          ./vctl help
+          ./.github/tool/vctl help
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
