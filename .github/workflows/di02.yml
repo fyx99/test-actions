@@ -32,7 +32,7 @@ jobs:
           ls 
           unzip tool/DISYSMGMTCLI06_0-80005163.ZIP
           ls
-          ls /tool
+          pwd
           ls /tool/vctl
           cd /vctl
           vctl help
