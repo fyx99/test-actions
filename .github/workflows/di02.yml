@@ -31,7 +31,7 @@ jobs:
           pwd
           echo ${{ secrets.DI_CRED }}
           echo ${{ secrets.DI_CRED.host }}
-          ./tool/vctl help
+          ./tool/vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
