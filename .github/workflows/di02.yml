@@ -29,7 +29,9 @@ jobs:
       - name: VCTL test
         run: |
           pwd
-          ./.github/tool/vctl help
+          echo ${{ secrets.DI_CRED }}
+          echo ${{ secrets.DI_CRED.host }}
+          ./tool/vctl help
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
