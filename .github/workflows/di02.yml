@@ -26,6 +26,8 @@ jobs:
         run: |
           ls tool
           unzip tool/vctl.zip
+          cd /tool
+          vctl help
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
