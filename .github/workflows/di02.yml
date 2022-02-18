@@ -41,6 +41,6 @@ jobs:
           ./tool/vctl vrep user rm /files/vflow/subengines/com/sap/python36/operators --recursive
           ./tool/vctl vrep user rm /files/vflow/graphs --recursive
       - name: VCTL Import Solution in User Workspace
-        run: ./tool/vctl vrep user import-solution "${solution_name}" "${solution_version}"
+        run: ./tool/vctl vrep user import-solution "${jq -r .name manifest.json}" "${solution_version}"
       - name: VCTL Logout
         run: ./tool/vctl logout
