@@ -18,13 +18,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Unzip VCTL
         run: |
-          ls
-          unzip tool/vctl.zip -d tool
-          ls
-          pwd
-          cd tool
-          ls
-          cd ..
+          unzip tool/vctl.zip
       - name: Build zipped solution from Vflow folder and Manifest.json
         run: |
           mkdir temp_solution/content/files -p
@@ -36,16 +30,16 @@ jobs:
       - name: VCTL Login
         run: |
           chmod +x tool/vctl
-          ./tool/vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'     
+          ./vctl login ${{ secrets.DI_HOST }} ${{ secrets.DI_TENANT }} ${{ secrets.DI_USER }} -p '${{ secrets.DI_PASSWORD }}'     
       - name: VCTL Upload Solution to Solution Repository
         run: |
-          ./tool/vctl solution delete "$(jq -r .name manifest.json)" "$(jq -r .version manifest.json)" || echo "No Solution deleted"
-          ./tool/vctl solution upload "solution.zip"
+          ./vctl solution delete "$(jq -r .name manifest.json)" "$(jq -r .version manifest.json)" || echo "No Solution deleted"
+          ./vctl solution upload "solution.zip"
       - name: VCTL Delete old Files in Dirs
         run: |
-          ./tool/vctl vrep user rm /files/vflow/subengines/com/sap/python36/operators --recursive
-          ./tool/vctl vrep user rm /files/vflow/graphs --recursive
+          ./vctl vrep user rm /files/vflow/subengines/com/sap/python36/operators --recursive
+          ./vctl vrep user rm /files/vflow/graphs --recursive
       - name: VCTL Import Solution in User Workspace
-        run: ./tool/vctl vrep user import-solution "$(jq -r .name manifest.json)" "$(jq -r .version manifest.json)"
+        run: ./vctl vrep user import-solution "$(jq -r .name manifest.json)" "$(jq -r .version manifest.json)"
       - name: VCTL Logout
-        run: ./tool/vctl logout
+        run: ./vctl logout
