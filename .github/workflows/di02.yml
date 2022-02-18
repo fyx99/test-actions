@@ -30,6 +30,7 @@ jobs:
           cd temp_solution
           zip -r ../solution-${solution_version}.zip . *
           cd ..
+          ls
       - name: VCTL Login
         run: |
           chmod +x tool/vctl
