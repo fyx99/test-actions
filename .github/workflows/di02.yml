@@ -30,7 +30,10 @@ jobs:
         run: |
           pwd
           ls 
-          unzip vctl.zip
+          unzip tool/DISYSMGMTCLI06_0-80005163.ZIP -d /vctl
+          ls
+          ls /tool
+          ls /tool/vctl
           cd /vctl
           vctl help
       - uses: actions/checkout@v2
